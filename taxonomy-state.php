@@ -29,18 +29,59 @@ get_header(); ?>
 				<?php twentyeleven_content_nav( 'nav-above' ); ?>
 
 				<?php /* Start the Loop */ ?>
+			<div class="content-list">
+
+			<?php if ( have_posts() ) : ?>
+
+<div class="left">
+				<?php /* Start the Loop */ $i = 1; ?>
 				<?php while ( have_posts() ) : the_post(); ?>
 
-					<?php
+					<?php if($i%2==1){
 						/* Include the Post-Format-specific template for the content.
 						 * If you want to overload this in a child theme then include a file
 						 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
 						 */
-						get_template_part( 'content', get_post_format() );
-					?>
+						//get_template_part( 'content', get_post_format() );
+						?>
+						
+			<div class="item">
+				<a class="article-title" href="<?php the_permalink();?>">
+					<?php the_title(); ?>
+				</a>
+				<a href="<?php the_author_link();?>" class="author">
+					By <?php the_author();?>
+				</a>
+			</div>
+<?php } $i++; ?>
 
 				<?php endwhile; ?>
+				</div>
+				<div class="right">
+				
+				<?php /* Start the Loop */ $i = 1; ?>
+				<?php while ( have_posts() ) : the_post(); ?>
 
+					<?php if($i%2==0){
+						/* Include the Post-Format-specific template for the content.
+						 * If you want to overload this in a child theme then include a file
+						 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
+						 */
+						//get_template_part( 'content', get_post_format() );
+						?>
+						
+			<div class="item">
+				<a class="article-title" href="<?php the_permalink();?>">
+					<?php the_title(); ?>
+				</a>
+				<a href="<?php the_author_link();?>" class="author">
+					By <?php the_author();?>
+				</a>
+			</div>
+<?php } $i++; ?>
+
+				<?php endwhile; ?>
+</div>
 				<?php twentyeleven_content_nav( 'nav-below' ); ?>
 
 			<?php else : ?>

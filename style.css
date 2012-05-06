@@ -2782,3 +2782,10 @@ h3.byline{
 	margin-bottom: 30px;
 	font-size: 18px;
 }
+
+.tax-state h1.page-title{
+	text-transform: uppercase;
+	text-align: center;
+	font-size: 36px;
+	margin-bottom: 5px;
+}
