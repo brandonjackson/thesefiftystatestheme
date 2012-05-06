@@ -106,7 +106,7 @@ function twentyeleven_setup() {
 
 	// Add support for custom backgrounds
 	add_custom_background();
-
+	wp_enqueue_script('jquery');
 	// This theme uses Featured Images (also known as post thumbnails) for per-post/per-page Custom Header images
 	add_theme_support( 'post-thumbnails' );
 

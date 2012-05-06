@@ -11,12 +11,8 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header">
 		<h1 class="entry-title"><?php the_title(); ?></h1>
+		<h3 class="byline">By <?php the_author();?></h3>
 
-		<?php if ( 'post' == get_post_type() ) : ?>
-		<div class="entry-meta">
-			<?php twentyeleven_posted_on(); ?>
-		</div><!-- .entry-meta -->
-		<?php endif; ?>
 	</header><!-- .entry-header -->
 
 	<div class="entry-content">
@@ -50,6 +46,13 @@
 			);
 		?>
 		<?php edit_post_link( __( 'Edit', 'twentyeleven' ), '<span class="edit-link">', '</span>' ); ?>
+		
+				<?php if ( 'post' == get_post_type() ) : ?>
+		<div class="entry-meta">
+			<?php twentyeleven_posted_on(); ?>
+		</div><!-- .entry-meta -->
+		<?php endif; ?>
+
 
 		<?php if ( get_the_author_meta( 'description' ) && ( ! function_exists( 'is_multi_author' ) || is_multi_author() ) ) : // If a user has filled out their description and this is a multi-author blog, show a bio on their entries ?>
 		<div id="author-info">
@@ -66,6 +69,7 @@
 				</div><!-- #author-link	-->
 			</div><!-- #author-description -->
 		</div><!-- #entry-author-info -->
+		
 		<?php endif; ?>
 	</footer><!-- .entry-meta -->
 </article><!-- #post-<?php the_ID(); ?> -->

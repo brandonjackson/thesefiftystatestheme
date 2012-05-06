@@ -94,6 +94,10 @@ body {
 #content {
 	width: 500px;
 }
+
+#content.home{
+	width: 800px;
+}
 #secondary {
 	float: right;
 	margin-right: 7.6%;
@@ -1049,11 +1053,6 @@ article.format-status .entry-content {
 .singular .entry-title,
 .singular .entry-header .entry-meta {
 	padding-right: 0;
-}
-.singular .entry-header .entry-meta {
-	position: absolute;
-	top: 0;
-	left: 0;
 }
 blockquote.pull {
 	font-size: 21px;
@@ -2698,4 +2697,88 @@ header#branding ul li a{
 	font-size: 18px;
 	line-height: 32px;
 	text-shadow: -1px -1px 2px #FFF;
+}
+#map{
+	width: 800px;
+	height: 505px;
+	display: block;
+}
+
+
+#tooltip { /* 261px x 100px, 3 5 5 23 padding */
+	display: none;
+	position: absolute;
+	width: 203px;
+	height: 62px;
+	padding: 18px 20px 20px 38px;
+	background-image: url('images/tooltipBG.png');
+	opacity: 1;
+	/*box-shadow: 1px 1px 3px #AAA; border-radius: 5px;*/
+}
+#tooltip.active{
+	display: block;
+}
+
+#tooltip h3{
+	margin: 0;
+}
+#tooltip a {
+	text-decoration: none;
+	color: black;
+}
+
+#comments{
+	display: none;
+}
+
+.content-list .item{
+	margin: 20px 0;
+	border-bottom: 1px solid #CCC;
+	display: block;
+	padding-bottom: 15px;
+}
+.content-list .item a.article-title{
+	text-transform: uppercase;
+	font-size: 25px;
+	text-decoration: none;
+	color: #888;
+	display: block;
+	line-height: 35px;
+}
+.content-list .item:hover a.article-title{
+	color: #333;
+}
+.content-list .item a.author{
+	text-transform: uppercase;
+	font-size: 14px;
+	color:#888;
+	text-decoration: none;
+	display: block;
+}
+
+
+.content-list .left{
+	width: 380px;
+	float: left;
+	padding-right: 20px;
+	border-right: 1px solid #CCC;
+}
+.content-list .right{
+	float: right;
+	width: 380px;
+}
+
+h1.entry-title {
+	text-transform: uppercase;
+	text-align: center;
+	font-size: 36px;
+	margin-bottom: 5px;
+}
+h3.byline{
+	text-transform: uppercase;
+	text-align: center;
+	color: #333;
+	margin-top: 5px;
+	margin-bottom: 30px;
+	font-size: 18px;
 }
