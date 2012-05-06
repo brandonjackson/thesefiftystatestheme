@@ -72,8 +72,11 @@ body {
 	padding: 0 2em;
 }
 #page {
-	margin: 2em auto;
-	max-width: 1000px;
+	margin: 0 auto;
+	width: 800px;
+}
+.single #page {
+	width: 550px;
 }
 #branding hgroup {
 	margin: 0 7.6%;
@@ -87,8 +90,6 @@ body {
 	width: 100%;
 }
 #content {
-	margin: 0 34% 0 7.6%;
-	width: 58.4%;
 }
 #secondary {
 	float: right;
@@ -102,16 +103,13 @@ body {
 }
 .singular #content,
 .left-sidebar.singular #content {
-	margin: 0 7.6%;
-	position: relative;
-	width: auto;
 }
 .singular .entry-header,
 .singular .entry-content,
 .singular footer.entry-meta,
 .singular #comments-title {
-	margin: 0 auto;
-	width: 68.9%;
+	/*margin: 0 auto;
+	width: 68.9%;*/
 }
 
 /* Attachments */
@@ -315,15 +313,16 @@ body {
 
 body, input, textarea {
 	color: #373737;
-	font: 15px "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font: 15px 'Old Standard TT',bodoni,garamond,serif;
 	font-weight: 300;
 	line-height: 1.625;
 }
+
 body {
-	background: #e2e2e2;
+	background-image: url('images/paper.jpg');
 }
 #page {
-	background: #fff;
+	/*background: #fff;*/
 }
 
 /* Headings */
@@ -727,6 +726,7 @@ a:hover {
 	line-height: 1.5em;
 	padding-bottom: .3em;
 	padding-top: 15px;
+	text-align: center;
 }
 .entry-title,
 .entry-title a {
@@ -1137,10 +1137,10 @@ blockquote.pull {
 }
 .singular .entry-meta .edit-link a {
 	bottom: auto;
-	left: 50px;
+	left: 0px;
 	position: absolute;
 	right: auto;
-	top: 80px;
+	top: 60px;
 }
 
 
@@ -2045,7 +2045,6 @@ a.comment-reply-link > span {
 	margin: 0 auto 1.625em;
 	padding: 1.625em;
 	position: relative;
-	width: 68.9%;
 }
 #respond input[type="text"],
 #respond textarea {
