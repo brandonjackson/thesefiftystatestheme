@@ -7,7 +7,8 @@
  * @since Twenty Eleven 1.0
  */
 
-get_header(); ?>
+get_header();
+global $wp_query; ?>
 
 		<section id="primary">
 			<div id="content" style='width:800px;' role="main">
@@ -45,7 +46,7 @@ get_header(); ?>
 						//get_template_part( 'content', get_post_format() );
 						?>
 						
-			<div class="item">
+			<div class="item" <?php if($wp_query->post_count==1){ echo "style='border-bottom: none;'"; }?>>
 				<a class="article-title" href="<?php the_permalink();?>">
 					<?php the_title(); ?>
 				</a>
@@ -70,7 +71,7 @@ get_header(); ?>
 						//get_template_part( 'content', get_post_format() );
 						?>
 						
-			<div class="item">
+			<div class="item" <?php if($wp_query->post_count==2){ echo "style='border-bottom: none;'"; }?>>
 				<a class="article-title" href="<?php the_permalink();?>">
 					<?php the_title(); ?>
 				</a>
