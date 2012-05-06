@@ -10,7 +10,7 @@
 get_header(); ?>
 
 		<section id="primary">
-			<div id="content" role="main">
+			<div id="content" style='width:800px;' role="main">
 
 			<?php if ( have_posts() ) : ?>
 
@@ -58,7 +58,7 @@ get_header(); ?>
 				<?php endwhile; ?>
 				</div>
 				<div class="right">
-				
+				<?php rewind_posts();?>
 				<?php /* Start the Loop */ $i = 1; ?>
 				<?php while ( have_posts() ) : the_post(); ?>
 
@@ -81,6 +81,7 @@ get_header(); ?>
 <?php } $i++; ?>
 
 				<?php endwhile; ?>
+				<?php endif; ?>
 </div>
 				<?php twentyeleven_content_nav( 'nav-below' ); ?>
 
@@ -102,5 +103,4 @@ get_header(); ?>
 			</div><!-- #content -->
 		</section><!-- #primary -->
 
-<?php get_sidebar(); ?>
 <?php get_footer(); ?>
