@@ -88,7 +88,7 @@ get_header(); ?>
 		</section><!-- #primary -->
   <div id="tooltip">
   	<h3>StateNameHere</h3>
-  	<a href="#" class="state-link"><span id="article-count">0</span> Articles</a>
+  	<a href="#" class="state-link">Click state to view articles</a><!--<span id="article-count">0</span> Articles</a>-->
   </div>
 
 <?php get_footer(); ?>
@@ -130,7 +130,7 @@ get_header(); ?>
     var mapY = mapPosition.top;
     
     function stateTooltip(st){
-    
+    	if(st.active==1){
     	bounds = st.getBBox();
     	bottomCenterX = (bounds.x+bounds.x2)/2 + mapX;
     	bottomCenterY = bounds.y2 + mapY;
@@ -154,10 +154,10 @@ get_header(); ?>
     	jQuery("#tooltip #article-count").text(Math.round(Math.random()*2));
     	jQuery("#tooltip").addClass("active");
     	jQuery("#tooltip").fadeIn();
-    
+    }
     };
     
-    var active = [ "ak","al","az","ca","fl","ga","ma","ny","or","pa","ut","tn","tx","wi","wy" ];
+    var active = [ "ak","al","az","ca","fl","ga","ma","ny","or","pa","tn","tx","wi","wy" ];
 
     //Draw Map and store Raphael paths
     for (var state in usMap) {
@@ -184,6 +184,9 @@ get_header(); ?>
 //           R.safari();
 //         };
 
+		st[0].onclick = function(){
+			window.location.href="http://www.thesefiftystates.org/state/"+st.name.replace(/\s+/g, '-');
+		};
         st[0].onmouseover = function () {
     	  stateTooltip(st);
           st.toFront();
@@ -214,6 +217,7 @@ get_header(); ?>
     	lightRed = "#FF3E49";
     	randomColor = colors[Math.round(Math.random()*2)];
     	//randomColor = "url('img/stripe_dense.png')"
+    	usRaphael[state].active = 1;
     	usRaphael[state].color = randomColor;
     	usRaphael[state].animate({fill:randomColor},500);
     	if(active.length>0) setTimeout(insertState,50);
