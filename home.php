@@ -34,7 +34,7 @@ get_header(); ?>
 				<a class="article-title" href="<?php the_permalink();?>">
 					<?php the_title(); ?>
 				</a>
-				<a href="<?php the_author_link();?>" class="author">
+				<a href="<?php the_permalink();?>" class="author">
 					By <?php the_author();?>
 				</a>
 			</div>
@@ -59,7 +59,7 @@ get_header(); ?>
 				<a class="article-title" href="<?php the_permalink();?>">
 					<?php the_title(); ?>
 				</a>
-				<a href="<?php the_author_link();?>" class="author">
+				<a href="<?php the_permalink();?>" class="author">
 					By <?php the_author();?>
 				</a>
 			</div>

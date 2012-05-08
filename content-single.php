@@ -11,7 +11,7 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header">
 		<h1 class="entry-title"><?php the_title(); ?></h1>
-		<h3 class="byline">By <a href="<?php the_author_link();?>"><?php the_author();?></a></h3>
+		<h3 class="byline">By <?php the_author_posts_link();?></h3>
 
 	</header><!-- .entry-header -->
 
