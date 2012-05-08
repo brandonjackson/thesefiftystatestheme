@@ -23,7 +23,7 @@
 			?>
 
 			<div id="site-generator">
-				&copy; <?php echo date("Y");?> These Fifty States. Design by <a href="http://www.brandonjacksondesign.com">Brandon Jackson</a>
+				&copy; <?php echo date("Y");?>, These Fifty States. Design by <a href="http://www.brandonjacksondesign.com">Brandon Jackson.</a>
 			</div>
 	</footer><!-- #colophon -->
 </div><!-- #page -->

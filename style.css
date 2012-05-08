@@ -460,7 +460,7 @@ input[type=text] {
 	padding: 3px;
 }
 input#s {
-	background: url(images/search.png) no-repeat 5px 6px;
+	background: url(images/search.png) no-repeat 5px 6px #FFF;
 	-moz-border-radius: 2px;
 	border-radius: 2px;
 	font-size: 14px;
@@ -508,7 +508,7 @@ a:hover {
 
 #branding {
 	border-top: 2px solid #bbb;
-	padding-bottom: 10px;
+	padding-bottom: 0px;
 	position: relative;
 	z-index: 9999;
 }
@@ -710,6 +710,9 @@ a:hover {
 	clear: both;
 	font-size: 12px;
 	line-height: 18px;
+}
+footer .entry-meta, footer.entry-meta{
+	text-align: center;
 }
 .entry-meta a {
 	font-weight: bold;
@@ -1663,10 +1666,9 @@ section.recent-posts .other-recent-posts li:after {
 
 /* Singular navigation */
 #nav-single {
-	float: right;
 	position: relative;
 	top: -0.3em;
-	text-align: right;
+	text-align: center;
 	z-index: 1;
 }
 #nav-single .nav-previous,
@@ -2657,11 +2659,13 @@ header#branding h2{
 	color: #777;
 }
 
-.single header#branding h1#site-title{
+.single header#branding h1#site-title, .single header#branding h1#site-title a{
 	font-size: 24px;
+	color: #CCC;
 }
 .single header#branding h2{
 	font-size: 12px;
+	display: none;
 }
 
 
@@ -2689,7 +2693,7 @@ header#branding ul li a{
 }
 
 .single header#branding ul li a{
-	height: 65px;
+	height: 42px;
 }
 
 .entry-content p {
@@ -2781,6 +2785,9 @@ h3.byline{
 	margin-top: 5px;
 	margin-bottom: 30px;
 	font-size: 18px;
+}
+h3.byline a{
+	color: #333;
 }
 
 .tax-state h1.page-title{
