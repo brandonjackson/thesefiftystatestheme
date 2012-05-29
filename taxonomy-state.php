@@ -17,7 +17,7 @@ global $wp_query; ?>
 
 				<header class="page-header">
 					<h1 class="page-title"><?php
-						printf( __( 'The State of %s', 'twentyeleven' ), '<span>' . single_cat_title( '', false ) . '</span>' );
+						printf( __( 'The State of %s', 'twentyeleven' ), '<span id="state-title">' . single_cat_title( '', false ) . '</span>' );
 					?></h1>
 
 					<?php
@@ -53,6 +53,7 @@ global $wp_query; ?>
 				<a href="<?php the_permalink();?>" class="author">
 					By <?php the_author();?>
 				</a>
+				<p><?php the_excerpt();?></p>
 			</div>
 <?php } $i++; ?>
 
@@ -78,6 +79,7 @@ global $wp_query; ?>
 				<a href="<?php the_permalink();?>" class="author">
 					By <?php the_author();?>
 				</a>
+				<p><?php the_excerpt();?></p>
 			</div>
 <?php } $i++; ?>
 

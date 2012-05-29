@@ -185,7 +185,7 @@ get_header(); ?>
 //         };
 
 		st[0].onclick = function(){
-			window.location.href="http://www.thesefiftystates.org/state/"+st.name.replace(/\s+/g, '-');
+			window.location.href="<?php home_url('/');?>state/"+st.name.replace(/\s+/g, '-');
 		};
         st[0].onmouseover = function () {
     	  stateTooltip(st);

@@ -25,7 +25,9 @@ get_header(); ?>
 				?>
 
 				<header class="page-header">
-					<h1 class="page-title author"><?php printf( __( 'Author Archives: %s', 'twentyeleven' ), '<span class="vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( "ID" ) ) ) . '" title="' . esc_attr( get_the_author() ) . '" rel="me">' . get_the_author() . '</a></span>' ); ?></h1>
+					<!--<h1 class="page-title author"><?php printf( __( 'Author Archives: %s', 'twentyeleven' ), '<span class="vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( "ID" ) ) ) . '" title="' . esc_attr( get_the_author() ) . '" rel="me">' . get_the_author() . '</a></span>' ); ?></h1>-->
+					<h2>The Work Of</h2>
+					<h1 class="page-title author"><?php printf( __( '%s', 'twentyeleven' ), '<span class="vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( "ID" ) ) ) . '" title="' . esc_attr( get_the_author() ) . '" rel="me">' . get_the_author() . '</a></span>' ); ?></h1>
 				</header>
 
 				<?php
@@ -52,18 +54,37 @@ get_header(); ?>
 				</div><!-- #entry-author-info -->
 				<?php endif; ?>
 
-				<?php /* Start the Loop */ ?>
-				<?php while ( have_posts() ) : the_post(); ?>
+				<div class="content-list">
+					<?php /* Start the Loop */ ?>
+					<?php $i = 1; ?>
+					<div class="left">
+						<?php while ( have_posts() ) : the_post(); ?>
+	
+							<?php if($i%2==1){ 
+								get_template_part( 'content', 'grid'); 
+							} ?>
+							
+							<?php $i++; ?>
+		
+						<?php endwhile; ?>
+					</div>
+	
+					<?php /* Start the Loop */ ?>
+					<?php $i = 1; ?>
+					<div class="right">
+						<?php rewind_posts(); ?>
+						<?php while ( have_posts() ) : the_post(); ?>
+		
+							<?php if($i%2==0){ 
+								get_template_part( 'content', 'grid'); 
+							} ?>
+							
+							<?php $i++; ?>
+		
+						<?php endwhile; ?>
+					</div>
+				</div>
 
-					<?php
-						/* Include the Post-Format-specific template for the content.
-						 * If you want to overload this in a child theme then include a file
-						 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-						 */
-						get_template_part( 'content', get_post_format() );
-					?>
-
-				<?php endwhile; ?>
 
 				<?php twentyeleven_content_nav( 'nav-below' ); ?>
 
@@ -85,5 +106,4 @@ get_header(); ?>
 			</div><!-- #content -->
 		</section><!-- #primary -->
 
-<?php get_sidebar(); ?>
 <?php get_footer(); ?>

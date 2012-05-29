@@ -2796,3 +2796,23 @@ h3.byline a{
 	font-size: 36px;
 	margin-bottom: 5px;
 }
+
+.author #content{
+	width: auto;
+}
+
+.author header.page-header h1, .author header.page-header h1 a,.author header.page-header h2 {
+	text-align: center;
+	color: black;
+	text-transform:uppercase;
+}
+.author header.page-header h2 {
+	font-size: 16px;
+	font-weight: bold;
+}
+.author header.page-header h1 a {
+	margin: 5px auto 50px;
+	letter-spacing: 0.2em;
+	font-size:36px;
+	display: block;
+}
