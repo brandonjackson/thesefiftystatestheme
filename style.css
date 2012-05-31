@@ -323,6 +323,10 @@ body {
 	padding-right: 20px;
 	margin-bottom: 0px;
 }
+.archive h1.entry-title a:hover{
+	text-decoration: underline;
+	color: #000;
+}
 .archive div.entry-meta, .archive div.entry-meta a{
 	text-transform: uppercase;
 	font-size: 14px;
@@ -546,7 +550,7 @@ a:hover {
 	text-decoration: none;
 }
 #site-title #blog-title{
-	color: #c20712;
+	color: #e10815; /*slightly darker color: #c20712;*/
 }
 #site-title a:hover,
 #site-title a:focus,
@@ -2206,7 +2210,6 @@ p.comment-form-comment {
 
 /* Site Generator Line */
 #site-generator {
-	background: #f9f9f9;
 	border-top: 1px solid #ddd;
 	color: #666;
 	font-size: 12px;
