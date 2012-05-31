@@ -14,6 +14,8 @@
 				<a href="<?php the_permalink();?>" class="author">
 					By <?php the_author();?>
 				</a>
-				<p><?php the_excerpt();?></p>
+				<div class='entry-summary'>
+					<?php the_excerpt();?>
+				</div>
 			</div>
 
