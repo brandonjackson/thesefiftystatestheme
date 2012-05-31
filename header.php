@@ -72,7 +72,10 @@
 <div id="page" class="hfeed">
 	<header id="branding" role="banner" class="clearfix">
 			<hgroup>
-				<h1 id="site-title"><span><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></span></h1>
+				<h1 id="site-title">
+					<span><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></span>
+				<?php if(is_category('Blog')){ ?><span id='blog-title'>Blog</span> <?php } ?>
+				</h1>
 				<h2 id="site-description"><?php bloginfo( 'description' ); ?></h2>
 			</hgroup>
 <!--
@@ -96,7 +99,13 @@
 				<div class="skip-link"><a class="assistive-text" href="#content" title="<?php esc_attr_e( 'Skip to primary content', 'twentyeleven' ); ?>"><?php _e( 'Skip to primary content', 'twentyeleven' ); ?></a></div>
 				<div class="skip-link"><a class="assistive-text" href="#secondary" title="<?php esc_attr_e( 'Skip to secondary content', 'twentyeleven' ); ?>"><?php _e( 'Skip to secondary content', 'twentyeleven' ); ?></a></div>
 				<?php /* Our navigation menu.  If one isn't filled out, wp_nav_menu falls back to wp_page_menu. The menu assiged to the primary position is the one used. If none is assigned, the menu with the lowest ID is used. */ ?>
-				<?php if(is_single()){ wp_nav_menu( array( 'theme_location' => 'article' ) ); } else {  wp_nav_menu( array( 'theme_location' => 'primary' ) ); } ?>
+				<?php if(is_single()){ 
+					wp_nav_menu( array( 'theme_location' => 'article' ) ); 
+				} else if(is_category('Blog')){
+					wp_nav_menu( array( 'theme_location' => 'blog' ) );
+				} else {  
+					wp_nav_menu( array( 'theme_location' => 'primary' ) ); 
+				} ?>
 			</nav><!-- #access -->
 	</header><!-- #branding -->
 

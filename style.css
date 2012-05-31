@@ -83,6 +83,9 @@ body {
 .single #page, .single #page #content {
 	width: 550px;
 }
+.page #content{
+	margin: 0 auto;
+}
 #branding hgroup {
 	margin: 0;
 }
@@ -100,8 +103,7 @@ body {
 }
 #secondary {
 	float: right;
-	margin-right: 7.6%;
-	width: 18.8%;
+	width: 25%;
 }
 
 /* Singular */
@@ -314,6 +316,26 @@ body {
 	width: auto;
 }
 
+.archive h1.entry-title{
+	text-align: left;
+	font-size: 30px;
+	font-weight: normal;
+	padding-right: 20px;
+	margin-bottom: 0px;
+}
+.archive div.entry-meta, .archive div.entry-meta a{
+	text-transform: uppercase;
+	font-size: 14px;
+	color: #555;
+	font-weight: normal;
+}
+
+.archive footer.entry-meta, .archive footer.entry-meta a{
+	text-align: left;
+	color: #AAA;
+	font-weight: normal;
+}
+
 
 /* =Global
 ----------------------------------------------- */
@@ -522,6 +544,9 @@ a:hover {
 	font-weight: bold;
 	line-height: 36px;
 	text-decoration: none;
+}
+#site-title #blog-title{
+	color: #c20712;
 }
 #site-title a:hover,
 #site-title a:focus,
@@ -1692,9 +1717,9 @@ section.recent-posts .other-recent-posts li:after {
 	margin: 0 0 2.2em;
 }
 .widget-title {
-	color: #666;
-	font-size: 10px;
-	font-weight: 500;
+	color: #000;
+	font-size: 11px;
+	font-weight: bold;
 	letter-spacing: 0.1em;
 	line-height: 2.6em;
 	text-transform: uppercase;
@@ -1702,6 +1727,8 @@ section.recent-posts .other-recent-posts li:after {
 .widget ul {
 	font-size: 15px;
 	margin: 0;
+	list-style: none;
+	border-top: 1px solid #DDD;
 }
 .widget ul ul {
 	margin-left: 1.5em;
@@ -1711,13 +1738,17 @@ section.recent-posts .other-recent-posts li:after {
 	font-size: 13px;
 }
 .widget a {
-	font-weight: bold;
+	font-weight: normal;
 	text-decoration: none;
+	color: #666;
+	display: block;
+	border-bottom: 1px solid #DDD;
+	padding: 5px 0;
 }
 .widget a:hover,
 .widget a:focus,
 .widget a:active {
-	text-decoration: underline;
+	background: #FCFCFC;
 }
 
 /* Search Widget */
