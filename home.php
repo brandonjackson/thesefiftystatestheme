@@ -13,7 +13,7 @@ get_header(); ?>
 			<div id="content" class="home" role="main">
 			
 			<div id="map"></div>
-			
+						
 			<div class="content-list">
 
 			<?php if ( have_posts() ) : ?>
@@ -157,7 +157,13 @@ get_header(); ?>
     }
     };
     
-    var active = [ "ak","al","az","ca","fl","ga","ma","ny","or","pa","tn","tx","wi","wy" ];
+    var active = [<?php $terms=get_terms('state',array('hide_empty'=>true));
+if  ($terms) {
+  foreach ($terms  as $term ) {
+  		echo '\''.$term->slug.'\',';
+  }
+}  
+?>];
 
     //Draw Map and store Raphael paths
     for (var state in usMap) {
@@ -185,7 +191,7 @@ get_header(); ?>
 //         };
 
 		st[0].onclick = function(){
-			window.location.href="<?php home_url('/');?>state/"+st.name.replace(/\s+/g, '-');
+			window.location.href="<?php home_url('/');?>state/"+state;
 		};
         st[0].onmouseover = function () {
     	  stateTooltip(st);
@@ -196,12 +202,10 @@ get_header(); ?>
 
 // tooltip tutorial: http://return-true.com/examples/map-orig.html
         st[0].onmouseout = function () {
-         // jQuery("#tooltip").removeClass("active");
           st.g.remove();
           st.toFront();
           R.safari();
         };
-                   
 
       })(usRaphael[state], state);
     }
