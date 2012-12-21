@@ -1765,6 +1765,7 @@ section.recent-posts .other-recent-posts li:after {
 }
 .widget_search #s {
 	width: 77%;
+	padding-top: 10px;
 }
 .widget_search #searchsubmit {
 	background: #ddd;
