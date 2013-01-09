@@ -84,38 +84,6 @@ get_header(); ?>
 
 		<?php endforeach; endforeach;?>			
 			</div>
-			
-<!--
-<ul class='issues clearfix'>
-<?php foreach ($issues as $issue ) { 
-$args = array(
-   'numberposts' => 25,
-   'orderby' => 'author',
-   'tax_query' => array(
-	array(
-		'taxonomy' => 'issues',
-		'field' => 'slug',
-		'terms' => $issue->slug
-	)
-   ),
-   'post_status' => 'publish'
-);
-$articles= get_posts ( $args );
-?>
-
-	<li>
-		<a class='title' href="<?php echo get_term_link($issue->slug,'issues'); ?>">
-			<?php echo $issue->name; ?>
-		</a>
-		<p>
-			<em>from <?php echo $issue->description; ?></em>
-		</p>
-		<p style='font-style: italic;'>—featuring the work of—</p>
-		<?php foreach($articles as $a){ echo get_user_meta($a->post_author,'nickname',true).'&mdash;'; } ?> 
-	</li>
-<?php } ?>
-</ul>
--->
 
 
 </div><!-- #content -->
