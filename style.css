@@ -317,10 +317,9 @@ body {
 }
 
 .archive h1.entry-title{
-	font-size: 30px;
 	font-weight: normal;
 	padding-right: 20px;
-	margin-bottom: 0px;
+	margin-bottom: 20px;
 }
 .archive h1.entry-title a:hover{
 	text-decoration: underline;
@@ -2915,8 +2914,8 @@ a.issue-heading{
 
 h1.entry-title {
 	text-align: center;
-	font-size: 48px;
-	line-height: 36px;
+	font-size: 36px;
+	line-height: 48px;
 	margin-bottom: 0px;
 }
 h3.byline{
