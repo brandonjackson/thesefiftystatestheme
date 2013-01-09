@@ -317,7 +317,6 @@ body {
 }
 
 .archive h1.entry-title{
-	text-align: left;
 	font-size: 30px;
 	font-weight: normal;
 	padding-right: 20px;
@@ -2828,34 +2827,45 @@ h1#intro-text {
 	display: none;
 }
 
-.home .content-list .item{
+a.issue-heading{
+	text-align: center;
+	font-size: 24px;
+	font-weight: bold;
+	display: block;
+	color: black;
+}
+
+.home .content-list .item, .category .content-list .item, #archives .content-list .item{
 	margin: 0;
 	border-bottom: none;
 	display: block;
 	padding-bottom: 10px;
+	width: 380px;
+	height: 80px;
+	float: left;
 }
-.home .content-list .item .state{
+.home .content-list .item .state, .category .content-list .item .state, #archives .content-list .item .state{
 	width: 45px;
 	height: 45px;
 	margin-right: 20px;
 	float: left;
 }
-.home .content-list .item .info{
-	width: 280px;
+.home .content-list .item .info, .category .content-list .item .info, #archives .content-list .item .info {
+	width: 300px;
 	float: left;
 }
-.home .content-list .item a.article-title{
+.home .content-list .item a.article-title, .category .content-list .item a.article-title, #archives .content-list .item a.article-title{
 	float: left;
-	font-size: 18px;
+	font-size: 16px;
 	text-decoration: none;
 	color: #333;
 	line-height: 25px;
 }
-.home .content-list .item:hover a.article-title{
+.home .content-list .item:hover a.article-title, .category .content-list .item:hover a.article-title, #archives .content-list .item:hover a.article-title{
 	color: #000;
 }
-.home .content-list .item a.author{
-	font-size: 18px;
+.home .content-list .item a.author, .category .content-list .item a.author, #archives .content-list .item a.author{
+	font-size: 16px;
 	display: block;
 	float: left;
 	color:#AAA;
@@ -2865,24 +2875,13 @@ h1#intro-text {
 	line-height: 25px;
 }
 
-.home .content-list .item p.excerpt{
+.home .content-list .item p.excerpt, .category .content-list .item p.excerpt, #archives .content-list .item p.excerpt{
 	clear: both;
-	font-size: 13px;
+	font-size: 12px;
 	line-height: 16px;
-	color: #555;
+	color: #AAA;
 	display: block;
 	height: 32px;
-}
-
-.home .content-list .left{
-	width: 380px;
-	float: left;
-	padding-right: 20px;
-	border-right: none;
-}
-.home .content-list .right{
-	float: right;
-	width: 380px;
 }
 
 

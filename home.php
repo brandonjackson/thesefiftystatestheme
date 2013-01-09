@@ -1,12 +1,4 @@
 <?php
-/**
- * The template for displaying Category Archive pages.
- *
- * @package WordPress
- * @subpackage Twenty_Eleven
- * @since Twenty Eleven 1.0
- */
-
 get_header(); ?>
 
 		<section id="primary">
@@ -16,109 +8,61 @@ get_header(); ?>
 						
 			<div class="content-list">
 
-			<?php if ( have_posts() ) : ?>
-
-<div class="left">
-				<?php /* Start the Loop */ $i = 1; ?>
-				<?php while ( have_posts() ) : the_post(); ?>
-
-					<?php if($i%2==1){
-						/* Include the Post-Format-specific template for the content.
-						 * If you want to overload this in a child theme then include a file
-						 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-						 */
-						//get_template_part( 'content', get_post_format() );
-						
-						/* FIND STATE SLUG */
-						$id = get_the_ID();
-						$terms = get_the_terms($id,'state');
-						if($terms != false){
-						$state_obj = array_pop($terms);//->slug;		
-						$state = $state_obj->slug;//print_r($state_obj);
-						} else {
-						$state = 'ct';
-						}
-						?>
-						
-			<div class="item clearfix">
-				<div class="state" id="state-<?php echo get_the_ID();?>" rel="<?php echo $state; ?>"></div>
-				<div class="info">
-					<a class="article-title" href="<?php the_permalink();?>">
-						<?php the_title(); ?>
-					</a>
-					<a href="<?php the_permalink();?>" class="author">
-						By <?php the_author();?>
-					</a>
-					<p class='excerpt clearfix'><?php $excerpt = get_the_excerpt();
-	$str = wordwrap($excerpt, 80);
-	$str = explode("\n", $str);
-	$excerpt = $str[0] . '...';
-	echo $excerpt; ?></p>
-				</div>
-			</div>
-<?php } $i++; ?>
-
-				<?php endwhile; ?>
-				</div>
-				<div class="right">
-				
-				<?php /* Start the Loop */ $i = 1; ?>
-				<?php while ( have_posts() ) : the_post(); ?>
-
-					<?php if($i%2==0){
-						/* Include the Post-Format-specific template for the content.
-						 * If you want to overload this in a child theme then include a file
-						 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-						 */
-						//get_template_part( 'content', get_post_format() );
-						
-												/* FIND STATE SLUG */
-						$id = get_the_ID();
-						$terms = get_the_terms($id,'state');
-						if($terms != false){
-						$state_obj = array_pop($terms);//->slug;		
-						$state = $state_obj->slug;//print_r($state_obj);
-						} else {
-						$state = 'ct';
-						}
-
-						?>
-						
-			<div class="item clearfix">
-				<div class="state" id="state-<?php echo get_the_ID();?>" rel="<?php echo $state; ?>"></div>
-				<div class="info">
-					<a class="article-title" href="<?php the_permalink();?>">
-						<?php the_title(); ?>
-					</a>
-					<a href="<?php the_permalink();?>" class="author">
-						By <?php the_author();?>
-					</a>
-					<p class='excerpt clearfix'><?php $excerpt = get_the_excerpt();
-	$str = wordwrap($excerpt, 80);
-	$str = explode("\n", $str);
-	$excerpt = $str[0] . '...';
-	echo $excerpt; ?></p>
-				</div>
-			</div>
-<?php } $i++; ?>
-
-				<?php endwhile; ?>
-</div>
-			<?php else : ?>
-
-				<article id="post-0" class="post no-results not-found">
-					<header class="entry-header">
-						<h1 class="entry-title"><?php _e( 'Nothing Found', 'twentyeleven' ); ?></h1>
-					</header><!-- .entry-header -->
-
-					<div class="entry-content">
-						<p><?php _e( 'Apologies, but no results were found for the requested archive. Perhaps searching will help find a related post.', 'twentyeleven' ); ?></p>
-						<?php get_search_form(); ?>
-					</div><!-- .entry-content -->
-				</article><!-- #post-0 -->
-
-			<?php endif; ?>
+			<?php 
 			
+			$issues_cat = get_category_by_slug('issues');
+			$categories = get_categories( array( 
+				'orderby' => 'slug',
+				'order' => 'DESC',
+				'hide_empty' =>true,
+				'number' => 2,
+				'child_of'=>$issues_cat->cat_ID ));
+
+			foreach($categories as $cat): ?>
+			
+			<a class='issue-heading' href="<?php echo get_category_link($cat->cat_ID);?>"><?php echo $cat->name; ?></a>
+			
+			<?php
+				
+				$posts = get_posts(array(
+					'cat'=>$cat->cat_ID,
+					'posts_per_page'=>-1
+				));
+				foreach($posts as $post):
+					setup_postdata($post);			
+													
+					/* FIND STATE SLUG */
+					$id = get_the_ID();
+					$terms = get_the_terms($id,'state');
+					if($terms != false){
+						$state_obj = array_pop($terms);//->slug;		
+						$state = $state_obj->slug;//print_r($state_obj);
+					} else {
+						$state = 'ct';
+					}
+					?>
+						
+			<div class="item clearfix">
+				<div class="state" id="state-<?php echo get_the_ID();?>" rel="<?php echo $state; ?>"></div>
+				<div class="info">
+					<a class="article-title" href="<?php the_permalink();?>">
+						<?php the_title(); ?>
+					</a>
+					<a href="<?php the_permalink();?>" class="author">
+						By <?php the_author();?>
+					</a>
+					<p class='excerpt clearfix'>
+					<?php 	$excerpt = get_the_excerpt();
+							$str = wordwrap($excerpt, 80);
+							$str = explode("\n", $str);
+							$excerpt = $str[0] . '...';
+							echo $excerpt; 
+					?>
+					</p>
+				</div>
+			</div>
+
+		<?php endforeach; endforeach;?>			
 			</div>
 
 			</div><!-- #content -->
@@ -139,12 +83,6 @@ get_header(); ?>
 			</ul>
 		</div>
 		<div class="widget" style="margin-right: 0;">
-
-		<?php
-		/* translators: %1$s: smilie */
-		/*$archive_content = '<p>' . sprintf( __( 'Try looking in the monthly archives.', 'twentyeleven' ), convert_smilies( ':)' ) ) . '</p>';
-		the_widget( 'WP_Widget_Archives', array('count' => 0 , 'dropdown' => 1 ), array( 'after_title' => '</h2>'.$archive_content ) );*/
-		?>
 
 		<?php the_widget( 'WP_Widget_Tag_Cloud' ); ?>
 		</div>
@@ -302,57 +240,6 @@ if  ($terms) {
     jQuery("#map").mouseleave(function(){
     	jQuery("#tooltip").hide();
     });
-    
-    jQuery(".state").each(function(index){
-    	state = jQuery(this).attr("rel");
-    	if(state=='?'){
-    		return;
-    	}
-    	id = jQuery(this).attr("id");
-    	console.log('state:'+state);
-    	console.log('id:'+id);
-		var RS = Raphael(id, 45, 45);
-		
-		attr = {
-			"fill": "#DDD",
-			"stroke": "#fff",
-			"stroke-opacity": "1",
-			"stroke-linejoin": "round",
-			"stroke-miterlimit": "4",
-			"stroke-width": "0.75",
-			"stroke-dasharray": "none"
-		};
-        rotations = {
-        	'al':5,
-        	'az':-7,
-        	'ca':-10,
-        	'ct':13,
-        	'ga':3,
-        	'ma':12,
-        	'ny':12,
-        	'pa':10,
-        	'sd':-2,
-        	'tn':4,
-        	'wi':2,
-        	'wy':-5
-        };
-        scales = {
-        	'ak':1.4,
-        	'ma':1.1,
-        	'ny':1.05
-        }
-        
-        path = RS.path(usMap[state].path).attr(attr);
-        r = rotations[state] ? rotations[state] : 0;
-        s = scales[state] ? scales[state] : 1;
-        rStr = 'r'+r+',s'+s;
-        
-        box = path.getBBox();
-        path.transform(rStr)
-        RS.setViewBox(box.x,box.y,box.width,box.height, true);
-
-    });
-
 
     function insertState()
     {
@@ -376,3 +263,5 @@ if  ($terms) {
   });
   
 </script>
+
+<script src="<?php echo bloginfo('template_directory');?>/js/states.js"></script>

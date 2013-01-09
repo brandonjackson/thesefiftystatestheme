@@ -10,13 +10,15 @@
 get_header(); ?>
 
 		<section id="primary">
-			<div id="content" role="main">
+			<div role="main">
+			
+			
 
 			<?php if ( have_posts() ) : ?>
 
 				<header class="page-header">
-					<h1 class="page-title"><?php
-						printf( __( 'Category Archives: %s', 'twentyeleven' ), '<span>' . single_cat_title( '', false ) . '</span>' );
+					<h1 class="entry-title"><?php
+						printf( __( '%s', 'twentyeleven' ), '<span>' . single_cat_title( '', false ) . '</span>' );
 					?></h1>
 
 					<?php
@@ -27,19 +29,47 @@ get_header(); ?>
 				</header>
 
 				<?php twentyeleven_content_nav( 'nav-above' ); ?>
-
+				<div class="content-list">
 				<?php /* Start the Loop */ ?>
 				<?php while ( have_posts() ) : the_post(); ?>
+				
+				
 
-					<?php
-						/* Include the Post-Format-specific template for the content.
-						 * If you want to overload this in a child theme then include a file
-						 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-						 */
-						get_template_part( 'content', get_post_format() );
+			<?php 
+																
+					/* FIND STATE SLUG */
+					$id = get_the_ID();
+					$terms = get_the_terms($id,'state');
+					if($terms != false){
+						$state_obj = array_pop($terms);//->slug;		
+						$state = $state_obj->slug;//print_r($state_obj);
+					} else {
+						$state = 'ct';
+					}
 					?>
-
+						
+			<div class="item clearfix">
+				<div class="state" id="state-<?php echo get_the_ID();?>" rel="<?php echo $state; ?>"></div>
+				<div class="info">
+					<a class="article-title" href="<?php the_permalink();?>">
+						<?php the_title(); ?>
+					</a>
+					<a href="<?php the_permalink();?>" class="author">
+						By <?php the_author();?>
+					</a>
+					<p class='excerpt clearfix'>
+					<?php 	$excerpt = get_the_excerpt();
+							$str = wordwrap($excerpt, 80);
+							$str = explode("\n", $str);
+							$excerpt = $str[0] . '...';
+							echo $excerpt; 
+					?>
+					</p>
+				</div>
+			</div>
 				<?php endwhile; ?>
+							</div>
+
 
 				<?php twentyeleven_content_nav( 'nav-below' ); ?>
 
@@ -61,5 +91,14 @@ get_header(); ?>
 			</div><!-- #content -->
 		</section><!-- #primary -->
 
-<?php get_sidebar(); ?>
+<script src="<?php echo bloginfo('template_directory');?>/js/raphael-min.js"></script>
+<script src="<?php echo bloginfo('template_directory');?>/js/us-map-svg-3.js"></script>
+
+<script>
+jQuery(function(){
+
+});
+</script>
+<script src="<?php echo bloginfo('template_directory');?>/js/states.js"></script>
+
 <?php get_footer(); ?>

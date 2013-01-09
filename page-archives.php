@@ -19,39 +19,73 @@ $issues=get_terms('issues',array());
 get_header(); ?>
 
 <style>
-#issues-archive h1{
-	font-weight: bold;
-	font-size: 2em;
-	text-align: center;
-	
-}
-#issues-archive ul{
-	list-style: none;
-	margin: 50px 0 0 0;
-	padding: 0;
-	text-align: center;
-}
-#issues-archive ul li{
-	box-shadow: 3px 3px 2px #AAA;
-	width:  335px;
-	float: left;
-	display: block;
-	padding: 20px;
-	border: 1px solid #CCC;
-	background: #F6F6F6;
-	margin-right: 20px;
-}
-#issues-archive ul li a.title{
-	font-size: 24px;
-	font-weight: bold;
-	color: black;
-}
 </style>
 
 <section id="primary">
-<div id="issues-archive" role="main">
+<div id="archives" role="main">
 
-<h1>Archives</h1>
+<h1 class='entry-title'>Archives</h1>
+
+<div class="content-list">
+
+			<?php 
+			
+			$issues_cat = get_category_by_slug('issues');
+			$categories = get_categories( array( 
+				'orderby' => 'slug',
+				'order' => 'DESC',
+				'hide_empty' =>true,
+				'number' => 50,
+				'child_of'=>$issues_cat->cat_ID ));
+
+			foreach($categories as $cat): ?>
+			
+			<a class='issue-heading' href="<?php echo get_category_link($cat->cat_ID);?>"><?php echo $cat->name; ?></a>
+			
+			<?php
+				
+				$posts = get_posts(array(
+					'cat'=>$cat->cat_ID,
+					'posts_per_page'=>-1
+				));
+				foreach($posts as $post):
+					setup_postdata($post);			
+													
+					/* FIND STATE SLUG */
+					$id = get_the_ID();
+					$terms = get_the_terms($id,'state');
+					if($terms != false){
+						$state_obj = array_pop($terms);//->slug;		
+						$state = $state_obj->slug;//print_r($state_obj);
+					} else {
+						$state = 'ct';
+					}
+					?>
+						
+			<div class="item clearfix">
+				<div class="state" id="state-<?php echo get_the_ID();?>" rel="<?php echo $state; ?>"></div>
+				<div class="info">
+					<a class="article-title" href="<?php the_permalink();?>">
+						<?php the_title(); ?>
+					</a>
+					<a href="<?php the_permalink();?>" class="author">
+						By <?php the_author();?>
+					</a>
+					<p class='excerpt clearfix'>
+					<?php 	$excerpt = get_the_excerpt();
+							$str = wordwrap($excerpt, 80);
+							$str = explode("\n", $str);
+							$excerpt = $str[0] . '...';
+							echo $excerpt; 
+					?>
+					</p>
+				</div>
+			</div>
+
+		<?php endforeach; endforeach;?>			
+			</div>
+			
+<!--
 <ul class='issues clearfix'>
 <?php foreach ($issues as $issue ) { 
 $args = array(
@@ -81,11 +115,41 @@ $articles= get_posts ( $args );
 	</li>
 <?php } ?>
 </ul>
-
+-->
 
 
 </div><!-- #content -->
 </section><!-- #primary -->
+
+	<section class="archival_footer clearfix">
+
+		<?php get_search_form(); ?>
+
+		<?php the_widget( 'WP_Widget_Recent_Posts', array( 'number' => 5), array( 'widget_id' => '404' ) ); ?>
+
+		<div class="widget">
+			<h2 class="widgettitle">Issues</h2>
+			<ul>
+			<?php $issues_cat = get_category_by_slug('issues');
+			wp_list_categories( array( 'orderby' => 'count', 'order' => 'DESC', 'show_count' => 0, 'title_li' => '', 'number' => 10, 'child_of'=>$issues_cat->cat_ID ) ); ?>
+			</ul>
+		</div>
+		<div class="widget" style="margin-right: 0;">
+
+		<?php the_widget( 'WP_Widget_Tag_Cloud' ); ?>
+		</div>
+	</section>
 <?php //get_sidebar(); 
 ?>
+
+<script src="<?php echo bloginfo('template_directory');?>/js/raphael-min.js"></script>
+<script src="<?php echo bloginfo('template_directory');?>/js/us-map-svg-3.js"></script>
+
+<script>
+jQuery(function(){
+
+});
+</script>
+<script src="<?php echo bloginfo('template_directory');?>/js/states.js"></script>
+
 <?php get_footer(); ?>
