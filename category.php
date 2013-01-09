@@ -29,46 +29,16 @@ get_header(); ?>
 				</header>
 
 				<?php twentyeleven_content_nav( 'nav-above' ); ?>
-				<div class="content-list">
-				<?php /* Start the Loop */ ?>
-				<?php while ( have_posts() ) : the_post(); ?>
+				<div class="archive-list">
 				
-				
+					<?php 
+					/* Start the Loop */ 
+					while(have_posts()): 
+						the_post();
+						get_template_part('archive-list-item');
+					endwhile; ?>
 
-			<?php 
-																
-					/* FIND STATE SLUG */
-					$id = get_the_ID();
-					$terms = get_the_terms($id,'state');
-					if($terms != false){
-						$state_obj = array_pop($terms);//->slug;		
-						$state = $state_obj->slug;//print_r($state_obj);
-					} else {
-						$state = 'ct';
-					}
-					?>
-						
-			<div class="item clearfix">
-				<div class="state" id="state-<?php echo get_the_ID();?>" rel="<?php echo $state; ?>"></div>
-				<div class="info">
-					<a class="article-title" href="<?php the_permalink();?>">
-						<?php the_title(); ?>
-					</a>
-					<a href="<?php the_permalink();?>" class="author">
-						By <?php the_author();?>
-					</a>
-					<p class='excerpt clearfix'>
-					<?php 	$excerpt = get_the_excerpt();
-							$str = wordwrap($excerpt, 80);
-							$str = explode("\n", $str);
-							$excerpt = $str[0] . '...';
-							echo $excerpt; 
-					?>
-					</p>
 				</div>
-			</div>
-				<?php endwhile; ?>
-							</div>
 
 
 				<?php twentyeleven_content_nav( 'nav-below' ); ?>

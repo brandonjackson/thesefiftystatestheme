@@ -6,63 +6,32 @@ get_header(); ?>
 			<h1 id="intro-text">Stories from coast to coast.</h1>
 			<div id="map"></div>
 						
-			<div class="content-list">
+			<div class="archive-list">
 
-			<?php 
-			
-			$issues_cat = get_category_by_slug('issues');
-			$categories = get_categories( array( 
-				'orderby' => 'slug',
-				'order' => 'DESC',
-				'hide_empty' =>true,
-				'number' => 2,
-				'child_of'=>$issues_cat->cat_ID ));
-
-			foreach($categories as $cat): ?>
-			
-			<a class='issue-heading' href="<?php echo get_category_link($cat->cat_ID);?>"><?php echo $cat->name; ?></a>
-			
-			<?php
+				<?php 
+				$issues_cat = get_category_by_slug('issues');
+				$categories = get_categories( array( 
+					'orderby' => 'slug',
+					'order' => 'DESC',
+					'hide_empty' =>true,
+					'number' => 2,
+					'child_of'=>$issues_cat->cat_ID ));
+	
+				foreach($categories as $cat): ?>
 				
-				$posts = get_posts(array(
-					'cat'=>$cat->cat_ID,
-					'posts_per_page'=>-1
-				));
-				foreach($posts as $post):
-					setup_postdata($post);			
-													
-					/* FIND STATE SLUG */
-					$id = get_the_ID();
-					$terms = get_the_terms($id,'state');
-					if($terms != false){
-						$state_obj = array_pop($terms);//->slug;		
-						$state = $state_obj->slug;//print_r($state_obj);
-					} else {
-						$state = 'ct';
-					}
-					?>
-						
-			<div class="item clearfix">
-				<div class="state" id="state-<?php echo get_the_ID();?>" rel="<?php echo $state; ?>"></div>
-				<div class="info">
-					<a class="article-title" href="<?php the_permalink();?>">
-						<?php the_title(); ?>
-					</a>
-					<a href="<?php the_permalink();?>" class="author">
-						By <?php the_author();?>
-					</a>
-					<p class='excerpt clearfix'>
-					<?php 	$excerpt = get_the_excerpt();
-							$str = wordwrap($excerpt, 80);
-							$str = explode("\n", $str);
-							$excerpt = $str[0] . '...';
-							echo $excerpt; 
-					?>
-					</p>
-				</div>
-			</div>
-
-		<?php endforeach; endforeach;?>			
+				<a class='issue-heading' href="<?php echo get_category_link($cat->cat_ID);?>"><?php echo $cat->name; ?></a>
+				
+				<?php
+					$posts = get_posts(array(
+						'cat'=>$cat->cat_ID,
+						'posts_per_page'=>-1
+					));
+					foreach($posts as $post):
+						setup_postdata($post);
+						get_template_part('archive-list-item');
+					endforeach;	
+				endforeach; ?>
+			
 			</div>
 
 			</div><!-- #content -->
