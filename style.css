@@ -2833,6 +2833,7 @@ a.issue-heading{
 	font-weight: bold;
 	display: block;
 	color: black;
+	clear: both;
 }
 
 .home .content-list .item, .category .content-list .item, #archives .content-list .item{
