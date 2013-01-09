@@ -26,10 +26,11 @@ jQuery(".state").each(function(index){
 		'ga':3,
 		'ma':12,
 		'ny':12,
+		'or':-5,
 		'pa':10,
 		'sd':-2,
 		'tn':4,
-		'va':5,
+		'va':7,
 		'wi':2,
 		'wy':-5
 	};
