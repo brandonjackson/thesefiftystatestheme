@@ -328,10 +328,11 @@ body {
 	color: #000;
 }
 .archive div.entry-meta, .archive div.entry-meta a{
-	text-transform: uppercase;
 	font-size: 14px;
 	color: #555;
 	font-weight: normal;
+	font-style: italic;
+	padding-left: 1px;
 }
 
 .archive footer.entry-meta, .archive footer.entry-meta a{
@@ -352,7 +353,8 @@ body, input, textarea {
 }
 
 body {
-	background-image: url('images/paper.jpg');
+	/*background-image: url('images/paper.jpg');*/
+	background: #FAFAFA;
 }
 #page {
 	/*background: #fff;*/
@@ -500,7 +502,7 @@ input#searchsubmit {
 
 /* Links */
 a {
-	color: #1982d1;
+	color: #c20712;
 	text-decoration: none;
 }
 a:focus,
@@ -1274,10 +1276,15 @@ blockquote.pull {
 }
 
 
-/* =error404
+/* =error404 and archival_footer
 ----------------------------------------------- */
 
-.error404 #main #searchform {
+.archival_footer{
+	padding-top: 100px;
+	clear: both;
+}
+
+.error404 #main #searchform, .archival_footer #searchform {
 	background: #f9f9f9;
 	border: 1px solid #ddd;
 	border-width: 1px 0;
@@ -1285,24 +1292,24 @@ blockquote.pull {
 	overflow: hidden;
 	padding: 1.625em 8.9%;
 }
-.error404 #main #s {
+.error404 #main #s, .archival_footer #s {
 	width: 95%;
 }
-.error404 #main .widget {
+.error404 #main .widget, .archival_footer .widget {
 	clear: none;
 	float: left;
 	margin-right: 3.7%;
 	width: 30.85%;
 }
-.error404 #main .widget_archive {
+.error404 #main .widget_archive, .archival_footer .widget_archive {
 	margin-right: 0;
 }
-.error404 #main .widget_tag_cloud {
+.error404 #main .widget_tag_cloud, .archival_footer .widget_tag_cloud {
 	float: none;
 	margin-right: 0;
 	width: 100%;
 }
-.error404 .widgettitle {
+.error404 .widgettitle, .archival_footer .widgettitle {
 	font-size: 10px;
 	letter-spacing: 0.1em;
 	line-height: 2.6em;
@@ -2737,8 +2744,8 @@ header#branding ul li a{
 
 .entry-content p {
 	font-family: 'Old Standard TT','Vollkorn',georgia, garamond;
-	font-size: 18px;
-	line-height: 32px;
+	font-size: 19px;
+	line-height: 30px;
 	text-shadow: -1px -1px 2px #FFF;
 }
 #map{
@@ -2748,15 +2755,14 @@ header#branding ul li a{
 }
 
 
-#tooltip { /* 261px x 100px, 3 5 5 23 padding */
+#tooltip { 
 	display: none;
 	position: absolute;
-	width: 203px;
-	height: 62px;
-	padding: 18px 20px 20px 38px;
-	background-image: url('images/tooltipBG.png');
+	width: 128px;
+	height: 36px;
+	padding: 15px 20px 16px 30px;
+	background-image: url('images/tooltipSmallBG.png');
 	opacity: 1;
-	/*box-shadow: 1px 1px 3px #AAA; border-radius: 5px;*/
 }
 #tooltip.active{
 	display: block;
@@ -2764,10 +2770,12 @@ header#branding ul li a{
 
 #tooltip h3{
 	margin: 0;
+	line-height: 1em;
+	font-weight: bold;
 }
 #tooltip a {
 	text-decoration: none;
-	color: black;
+	color: #AAA;
 }
 
 #comments{
@@ -2775,30 +2783,28 @@ header#branding ul li a{
 }
 
 .content-list .item{
-	margin: 20px 0;
+	margin: 0;
 	border-bottom: 1px solid #CCC;
 	display: block;
-	padding-bottom: 15px;
+	padding: 10px;
 }
 .content-list .item a.article-title{
-	text-transform: uppercase;
-	font-size: 25px;
+	font-size: 22px;
 	text-decoration: none;
-	color: #888;
-	display: block;
-	line-height: 35px;
+	color: #333;
+	line-height: 25px;
 }
 .content-list .item:hover a.article-title{
-	color: #333;
+	color: #000;
 }
 .content-list .item a.author{
-	text-transform: uppercase;
-	font-size: 14px;
-	color:#888;
-	text-decoration: none;
+	font-size: 15px;
 	display: block;
+	font-style: italic;
+	color:#AAA;
+	text-decoration: none;
+	padding-left: 1px;
 }
-
 
 .content-list .left{
 	width: 380px;
@@ -2812,18 +2818,18 @@ header#branding ul li a{
 }
 
 h1.entry-title {
-	text-transform: uppercase;
 	text-align: center;
-	font-size: 36px;
-	margin-bottom: 5px;
+	font-size: 48px;
+	line-height: 36px;
+	margin-bottom: 0px;
 }
 h3.byline{
-	text-transform: uppercase;
 	text-align: center;
 	color: #333;
-	margin-top: 5px;
+	margin-top: 0px;
 	margin-bottom: 30px;
 	font-size: 18px;
+	font-style: italic;
 }
 h3.byline a{
 	color: #333;

@@ -86,9 +86,35 @@ get_header(); ?>
 
 			</div><!-- #content -->
 		</section><!-- #primary -->
+		
+				
+	<section class="archival_footer clearfix">
+
+		<?php get_search_form(); ?>
+
+		<?php the_widget( 'WP_Widget_Recent_Posts', array( 'number' => 5), array( 'widget_id' => '404' ) ); ?>
+
+		<div class="widget">
+			<h2 class="widgettitle">Issues</h2>
+			<ul>
+			<?php $issues_cat = get_category_by_slug('issues');
+			wp_list_categories( array( 'orderby' => 'count', 'order' => 'DESC', 'show_count' => 0, 'title_li' => '', 'number' => 10, 'child_of'=>$issues_cat->cat_ID ) ); ?>
+			</ul>
+		</div>
+		<div class="widget" style="margin-right: 0;">
+
+		<?php
+		/* translators: %1$s: smilie */
+		/*$archive_content = '<p>' . sprintf( __( 'Try looking in the monthly archives.', 'twentyeleven' ), convert_smilies( ':)' ) ) . '</p>';
+		the_widget( 'WP_Widget_Archives', array('count' => 0 , 'dropdown' => 1 ), array( 'after_title' => '</h2>'.$archive_content ) );*/
+		?>
+
+		<?php the_widget( 'WP_Widget_Tag_Cloud' ); ?>
+		</div>
+	</section>
   <div id="tooltip">
   	<h3>StateNameHere</h3>
-  	<a href="#" class="state-link">Click state to view articles</a><!--<span id="article-count">0</span> Articles</a>-->
+  	<a href="#" class="state-link"><span id="article-count">0 Articles</span></a>
   </div>
 
 <?php get_footer(); ?>
@@ -130,39 +156,65 @@ get_header(); ?>
     var mapY = mapPosition.top;
     
     function stateTooltip(st){
-    	if(st.active==1){
-    	bounds = st.getBBox();
-    	bottomCenterX = (bounds.x+bounds.x2)/2 + mapX;
-    	bottomCenterY = bounds.y2 + mapY;
-    	
-    	middleRightX = bounds.x2 + mapX;
-    	middleRightY = (bounds.y+bounds.y2)/2 + mapY;
-    	
-    	// bottomCenter Tooltip Position:
-    	// tooltipX = bottomCenterX - jQuery("#tooltip").width()/2; // top left
-    	// tooltipY = bottomCenterY;
-    	
-    	// middleRight Tooltip Position
-    	tooltipX = middleRightX;
-    	tooltipY = middleRightY - jQuery("#tooltip").innerHeight()/2;
-    	
-    	jQuery("#tooltip").css({
-    		"left":tooltipX,
-    		"top":tooltipY
-    	});
-    	jQuery("#tooltip h3").text(st.name);
-    	jQuery("#tooltip #article-count").text(Math.round(Math.random()*2));
-    	jQuery("#tooltip").addClass("active");
-    	jQuery("#tooltip").fadeIn();
-    }
+    	jQuery("#tooltip").hide();
+	if(st.active!=1){
+		return;
+	}
+	bounds = st.getBBox();
+	bottomCenterX = (bounds.x+bounds.x2)/2 + mapX;
+	bottomCenterY = bounds.y2 + mapY;
+	
+	middleRightX = bounds.x2 + mapX;
+	middleRightY = (bounds.y+bounds.y2)/2 + mapY;
+	
+	// bottomCenter Tooltip Position:
+	// tooltipX = bottomCenterX - jQuery("#tooltip").width()/2; // top left
+	// tooltipY = bottomCenterY;
+	
+	// Set x-axis biases
+	var xBias = 0;
+	switch(st.abbreviation){
+		case "ca":
+			xBias = 35; break;
+		case "ny":
+			xBias = 15; break;
+		case "ak":
+			xBias = 35; break;
+	}
+	
+	// middleRight Tooltip Position
+	tooltipX = middleRightX - 3 - xBias;
+	tooltipY = middleRightY - jQuery("#tooltip").innerHeight()/2;
+	
+	// Set position
+	jQuery("#tooltip").css({
+		"left":tooltipX,
+		"top":tooltipY
+	});
+	
+	// Add Title
+	jQuery("#tooltip h3").text(st.name);
+	
+	// Include article count (inflect if plural)
+	if(st.count==1){
+		jQuery("#tooltip #article-count").text("1 Story");
+	} else{
+		jQuery("#tooltip #article-count").text(st.count+' Stories');
+	}
+
+	jQuery("#tooltip").addClass("active");
+	jQuery("#tooltip").fadeIn(250);
     };
     
     var active = [<?php $terms=get_terms('state',array('hide_empty'=>true));
 if  ($terms) {
   foreach ($terms  as $term ) {
-  		echo '\''.$term->slug.'\',';
+  	echo json_encode(array( 
+  		"abbreviation" => $term->slug,
+  		"name" => $term->name, 
+  		"count"=>$term->count)).',';
   }
-}  
+}
 ?>];
 
     //Draw Map and store Raphael paths
@@ -175,7 +227,7 @@ if  ($terms) {
       usRaphael[state].color = Raphael.getColor();
       
       (function (st, state) {
-		st.name = usMap[state].name;
+	st.name = usMap[state].name;
         st[0].style.cursor = "pointer";
 
 //         st[0].onmouseover = function () {
@@ -193,7 +245,7 @@ if  ($terms) {
 		st[0].onclick = function(){
 			window.location.href="<?php home_url('/');?>state/"+state;
 		};
-        st[0].onmouseover = function () {
+        st[0].onmouseover = function (){
     	  stateTooltip(st);
           st.toFront();
           st.g = st.glow({opacity: 0,color: "#FFF"});
@@ -201,7 +253,7 @@ if  ($terms) {
         };
 
 // tooltip tutorial: http://return-true.com/examples/map-orig.html
-        st[0].onmouseout = function () {
+        st[0].onmouseout = function (){
           st.g.remove();
           st.toFront();
           R.safari();
@@ -209,11 +261,16 @@ if  ($terms) {
 
       })(usRaphael[state], state);
     }
+    
+    jQuery("#map").mouseleave(function(){
+    	jQuery("#tooltip").hide();
+    });
 
 
     function insertState()
     {
-    	state = active.pop();
+    	stateObject = active.pop();
+    	state = stateObject.abbreviation;
     	// Palette: #13638F,#C20712
     	colors = ["#ED2632","#C20712","#ff8088"];//"#FF3E49"];
     	darkRed = "#C20712";
@@ -222,6 +279,8 @@ if  ($terms) {
     	randomColor = colors[Math.round(Math.random()*2)];
     	//randomColor = "url('img/stripe_dense.png')"
     	usRaphael[state].active = 1;
+    	usRaphael[state].count = stateObject.count;
+    	usRaphael[state].abbreviation = stateObject.abbreviation;
     	usRaphael[state].color = randomColor;
     	usRaphael[state].animate({fill:randomColor},500);
     	if(active.length>0) setTimeout(insertState,50);
