@@ -565,9 +565,8 @@ a:hover {
 	margin: 0;
 }
 #branding img {
-	height: auto;
 	margin-bottom: -7px;
-	width: 100%;
+	margin: 20px 0 0 5px;
 }
 
 
@@ -1085,7 +1084,7 @@ article.format-status .entry-content {
 .singular .entry-title {
 	color: #000;
 	font-size: 36px;
-	font-weight: bold;
+	font-weight: normal;
 	line-height: 48px;
 }
 .singular .entry-title,
@@ -1720,6 +1719,46 @@ section.recent-posts .other-recent-posts li:after {
 	padding-left: .5em;
 }
 
+nav#article-nav{
+	border-top: 1px solid #CCC;
+	border-bottom: 1px solid #CCC;
+	padding: 0;
+	margin-bottom: 30px;
+}
+nav#article-nav .next-article a, nav#article-nav .prev-article a {
+	width: 25%;
+	float: left;
+	text-decoration: none;
+	color: #333;
+	font-size: 22px;
+	line-height: 28px;
+	font-weight: normal;
+	height: 56px;
+}
+
+nav#article-nav .next-article a {
+	padding: 20px 18% 20px 6%;
+	text-align: left;
+	background-image: url('images/carat-right.png');
+	background-repeat: no-repeat;
+	background-position: 100% 50%;
+}
+nav#article-nav .next-article a:hover{
+	background-image: url('images/carat-right-hover.png');
+}
+
+nav#article-nav .prev-article a {
+	padding: 20px 6% 20px 18%;
+	text-align: right;
+	border-right: 1px solid #CCC;
+	background-image: url('images/carat-left.png');
+	background-repeat: no-repeat;
+	background-position: 2% 50%;
+}
+nav#article-nav .prev-article a:hover{
+	background-image: url('images/carat-left-hover.png');
+}
+
 
 /* =Widgets
 ----------------------------------------------- */
@@ -2221,6 +2260,11 @@ p.comment-form-comment {
 }
 
 /* Site Generator Line */
+
+.single #site-generator{
+	border-top: none;
+}
+
 #site-generator {
 	border-top: 1px solid #ddd;
 	color: #666;
@@ -2730,16 +2774,13 @@ header#branding ul li a{
 	text-transform: uppercase;
 	text-decoration: none;
 	font-size: 14px;
-	padding: 15px 0 0 15px;
-	height: 80px;
+	padding: 15px 26px;
 	border-left: 1px solid #EEE;
 	display: block;
-	width: 105px;
-	font-weight: bold;
+	text-align: center;
 }
-
-.single header#branding ul li a{
-	height: 42px;
+header#branding ul li a:hover, header#branding .current-menu-item > a{
+	color: #ED2632;
 }
 
 .entry-content p {
@@ -2752,6 +2793,11 @@ header#branding ul li a{
 	width: 800px;
 	height: 505px;
 	display: block;
+}
+
+h1#intro-text {
+	font-size: 34px;
+	margin: -20px 0 20px 5px;
 }
 
 
@@ -2781,6 +2827,64 @@ header#branding ul li a{
 #comments{
 	display: none;
 }
+
+.home .content-list .item{
+	margin: 0;
+	border-bottom: none;
+	display: block;
+	padding-bottom: 10px;
+}
+.home .content-list .item .state{
+	width: 45px;
+	height: 45px;
+	margin-right: 20px;
+	float: left;
+}
+.home .content-list .item .info{
+	width: 280px;
+	float: left;
+}
+.home .content-list .item a.article-title{
+	float: left;
+	font-size: 18px;
+	text-decoration: none;
+	color: #333;
+	line-height: 25px;
+}
+.home .content-list .item:hover a.article-title{
+	color: #000;
+}
+.home .content-list .item a.author{
+	font-size: 18px;
+	display: block;
+	float: left;
+	color:#AAA;
+	text-decoration: none;
+	padding-left:4px;
+	font-style: normal;
+	line-height: 25px;
+}
+
+.home .content-list .item p.excerpt{
+	clear: both;
+	font-size: 13px;
+	line-height: 16px;
+	color: #555;
+	display: block;
+	height: 32px;
+}
+
+.home .content-list .left{
+	width: 380px;
+	float: left;
+	padding-right: 20px;
+	border-right: none;
+}
+.home .content-list .right{
+	float: right;
+	width: 380px;
+}
+
 
 .content-list .item{
 	margin: 0;

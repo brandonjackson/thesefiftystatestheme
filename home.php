@@ -11,7 +11,7 @@ get_header(); ?>
 
 		<section id="primary">
 			<div id="content" class="home" role="main">
-			
+			<h1 id="intro-text">Stories from coast to coast.</h1>
 			<div id="map"></div>
 						
 			<div class="content-list">
@@ -28,15 +28,33 @@ get_header(); ?>
 						 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
 						 */
 						//get_template_part( 'content', get_post_format() );
+						
+						/* FIND STATE SLUG */
+						$id = get_the_ID();
+						$terms = get_the_terms($id,'state');
+						if($terms != false){
+						$state_obj = array_pop($terms);//->slug;		
+						$state = $state_obj->slug;//print_r($state_obj);
+						} else {
+						$state = 'ct';
+						}
 						?>
 						
-			<div class="item">
-				<a class="article-title" href="<?php the_permalink();?>">
-					<?php the_title(); ?>
-				</a>
-				<a href="<?php the_permalink();?>" class="author">
-					By <?php the_author();?>
-				</a>
+			<div class="item clearfix">
+				<div class="state" id="state-<?php echo get_the_ID();?>" rel="<?php echo $state; ?>"></div>
+				<div class="info">
+					<a class="article-title" href="<?php the_permalink();?>">
+						<?php the_title(); ?>
+					</a>
+					<a href="<?php the_permalink();?>" class="author">
+						By <?php the_author();?>
+					</a>
+					<p class='excerpt clearfix'><?php $excerpt = get_the_excerpt();
+	$str = wordwrap($excerpt, 80);
+	$str = explode("\n", $str);
+	$excerpt = $str[0] . '...';
+	echo $excerpt; ?></p>
+				</div>
 			</div>
 <?php } $i++; ?>
 
@@ -53,15 +71,34 @@ get_header(); ?>
 						 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
 						 */
 						//get_template_part( 'content', get_post_format() );
+						
+												/* FIND STATE SLUG */
+						$id = get_the_ID();
+						$terms = get_the_terms($id,'state');
+						if($terms != false){
+						$state_obj = array_pop($terms);//->slug;		
+						$state = $state_obj->slug;//print_r($state_obj);
+						} else {
+						$state = 'ct';
+						}
+
 						?>
 						
-			<div class="item">
-				<a class="article-title" href="<?php the_permalink();?>">
-					<?php the_title(); ?>
-				</a>
-				<a href="<?php the_permalink();?>" class="author">
-					By <?php the_author();?>
-				</a>
+			<div class="item clearfix">
+				<div class="state" id="state-<?php echo get_the_ID();?>" rel="<?php echo $state; ?>"></div>
+				<div class="info">
+					<a class="article-title" href="<?php the_permalink();?>">
+						<?php the_title(); ?>
+					</a>
+					<a href="<?php the_permalink();?>" class="author">
+						By <?php the_author();?>
+					</a>
+					<p class='excerpt clearfix'><?php $excerpt = get_the_excerpt();
+	$str = wordwrap($excerpt, 80);
+	$str = explode("\n", $str);
+	$excerpt = $str[0] . '...';
+	echo $excerpt; ?></p>
+				</div>
 			</div>
 <?php } $i++; ?>
 
@@ -264,6 +301,56 @@ if  ($terms) {
     
     jQuery("#map").mouseleave(function(){
     	jQuery("#tooltip").hide();
+    });
+    
+    jQuery(".state").each(function(index){
+    	state = jQuery(this).attr("rel");
+    	if(state=='?'){
+    		return;
+    	}
+    	id = jQuery(this).attr("id");
+    	console.log('state:'+state);
+    	console.log('id:'+id);
+		var RS = Raphael(id, 45, 45);
+		
+		attr = {
+			"fill": "#DDD",
+			"stroke": "#fff",
+			"stroke-opacity": "1",
+			"stroke-linejoin": "round",
+			"stroke-miterlimit": "4",
+			"stroke-width": "0.75",
+			"stroke-dasharray": "none"
+		};
+        rotations = {
+        	'al':5,
+        	'az':-7,
+        	'ca':-10,
+        	'ct':13,
+        	'ga':3,
+        	'ma':12,
+        	'ny':12,
+        	'pa':10,
+        	'sd':-2,
+        	'tn':4,
+        	'wi':2,
+        	'wy':-5
+        };
+        scales = {
+        	'ak':1.4,
+        	'ma':1.1,
+        	'ny':1.05
+        }
+        
+        path = RS.path(usMap[state].path).attr(attr);
+        r = rotations[state] ? rotations[state] : 0;
+        s = scales[state] ? scales[state] : 1;
+        rStr = 'r'+r+',s'+s;
+        
+        box = path.getBBox();
+        path.transform(rStr)
+        RS.setViewBox(box.x,box.y,box.width,box.height, true);
+
     });
 
 

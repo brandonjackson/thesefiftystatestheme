@@ -18,10 +18,14 @@ get_header(); ?>
 
 					<?php comments_template( '', true ); ?>
 					
-					<nav id="nav-single">
+					<nav id="article-nav">
 						<h3 class="assistive-text"><?php _e( 'Post navigation', 'twentyeleven' ); ?></h3>
-						<span class="nav-previous"><?php previous_post_link( '%link', __( '<span class="meta-nav">&larr;</span> Previous', 'twentyeleven' ) ); ?></span>
-						<span class="nav-next"><?php next_post_link( '%link', __( 'Next <span class="meta-nav">&rarr;</span>', 'twentyeleven' ) ); ?></span>
+						<div class="prev-article">
+							<?php previous_post_link( '%link', '%title', true); ?>
+						</div>
+						<div class="next-article">
+							<?php next_post_link( '%link', '%title', true); ?>
+						</div>
 					</nav><!-- #nav-single -->
 
 				<?php endwhile; // end of the loop. ?>

@@ -72,11 +72,10 @@
 <div id="page" class="hfeed">
 	<header id="branding" role="banner" class="clearfix">
 			<hgroup>
-				<h1 id="site-title">
-					<span><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></span>
-				<?php if(is_category('Blog')){ ?><span id='blog-title'>Blog</span> <?php } ?>
-				</h1>
-				<h2 id="site-description"><?php bloginfo( 'description' ); ?></h2>
+				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
+				<img src="<?php echo get_stylesheet_directory_uri();?>/images/thesefiftystates.png" alt="These Fifty States" />
+				</a></span>
+				
 			</hgroup>
 <!--
 			<?php
